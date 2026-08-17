@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>집사냥 101 — 설치부터 첫 질문까지 A to Z</title>
+<style>
+  :root { --navy:#1B2A4A; --orange:#F47B20; --paper:#FAF8F5; --slate:#6b7480; --line:#d9d4cb; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif; background:var(--paper); color:var(--navy); line-height:1.7; }
+  .wrap { max-width:720px; margin:0 auto; padding:48px 20px 80px; }
+  .eyebrow { display:flex; align-items:center; gap:10px; color:var(--orange); font-weight:700; font-size:15px; margin-bottom:12px; }
+  .eyebrow::before { content:""; width:32px; height:5px; background:var(--orange); }
+  h1 { font-size:32px; font-weight:900; line-height:1.3; margin-bottom:16px; }
+  .lead { font-size:17px; color:#33415e; margin-bottom:8px; }
+  h2 { font-size:23px; font-weight:900; margin:56px 0 8px; padding-top:24px; border-top:2px solid var(--navy); }
+  h2 .part { color:var(--orange); }
+  h3 { font-size:17px; font-weight:800; margin:26px 0 8px; }
+  p { margin-bottom:14px; font-size:15.5px; }
+  .step { display:flex; gap:14px; padding:16px 0; border-bottom:1px solid var(--line); }
+  .step .n { font-size:24px; font-weight:900; color:var(--orange); min-width:34px; }
+  .step h3 { margin:0 0 4px; }
+  .step p { margin:0 0 6px; color:#33415e; font-size:15px; }
+  .term { background:#161D2E; color:#D8DEE9; border-radius:10px; padding:16px 18px; font-family:'D2Coding',Consolas,monospace; font-size:14px; margin:14px 0; overflow-x:auto; }
+  .term .u { color:#7EE787; font-weight:700; }
+  .term .hl { color:var(--orange); font-weight:700; }
+  .shot { margin:12px 0 4px; }
+  .shot img { width:100%; border:1px solid var(--line); border-radius:8px; display:block; }
+  .shot .cap { font-size:13px; color:var(--slate); margin-top:6px; }
+  .note { border-left:4px solid var(--orange); padding:12px 16px; background:#fff; margin:18px 0; color:#33415e; font-size:14.5px; }
+  .warn { background:var(--navy); color:#fff; border-radius:10px; padding:20px; margin:24px 0; font-size:15px; }
+  .warn b { color:var(--orange); }
+  .faq dt { font-weight:800; margin-top:18px; }
+  .faq dt::before { content:"Q. "; color:var(--orange); font-weight:900; }
+  .faq dd { margin:6px 0 0; color:#33415e; }
+  .btn { display:inline-block; background:var(--orange); color:#fff; font-weight:800; padding:10px 18px; border-radius:8px; text-decoration:none; margin:6px 0; }
+  a { color:var(--orange); font-weight:700; }
+  code { background:#eee8df; padding:1px 6px; border-radius:4px; font-size:14px; }
+
+  .mock { border:1px solid var(--line); border-radius:10px; background:#fff; margin:12px 0 4px; overflow:hidden; }
+  .mock .bar { display:flex; align-items:center; gap:6px; background:#ECE7DE; padding:8px 12px; font-size:12px; color:var(--slate); }
+  .mock .dot { width:10px; height:10px; border-radius:50%; }
+  .mock .body { padding:22px 18px; }
+  .cap { font-size:13px; color:var(--slate); margin:6px 0 0; }
+  .dl-btn { display:inline-block; background:#0E0E0E; color:#fff; font-weight:800; padding:12px 26px; border-radius:10px; font-size:15px; }
+  .gh-code { display:inline-block; background:#1f883d; color:#fff; font-weight:700; padding:7px 14px; border-radius:6px; font-size:13.5px; }
+  .gh-menu { border:1px solid var(--line); border-radius:8px; margin-top:8px; max-width:300px; font-size:13.5px; background:#fff; box-shadow:0 4px 14px rgba(0,0,0,.08); }
+  .gh-menu div { padding:8px 14px; border-bottom:1px solid #f0ece5; color:#333; }
+  .gh-menu div:last-child { border-bottom:none; }
+  .gh-menu .pick { background:#fff3e8; color:var(--navy); font-weight:800; outline:2px solid var(--orange); border-radius:4px; }
+  .app-input { border:1.5px solid var(--line); border-radius:10px; padding:12px 14px; color:var(--slate); font-size:14px; margin-top:10px; }
+  .app-input b { color:var(--navy); }
+  footer { margin-top:64px; padding-top:20px; border-top:1px solid var(--line); font-size:13px; color:var(--slate); }
+  .toc { background:#fff; border:1px solid var(--line); border-radius:10px; padding:16px 20px; margin:20px 0; font-size:15px; }
+  .toc b { display:block; margin-bottom:6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="eyebrow">집사냥 101</div>
+<h1>개발자 아니어도 됩니다.<br>설치부터 첫 질문까지, 화면 그대로 따라오세요.</h1>
+<p class="lead">집사냥 에이전트의 화면이 개발자 도구처럼 보여서 겁이 날 수 있습니다. 실제로 하는 일은 <b>한국어로 질문을 치는 것</b>뿐입니다. 이 페이지는 구매 전 "내가 쓸 수 있는 물건인가"를 판단할 수 있도록, 설치의 전 과정을 단계별 화면 안내와 함께 보여드립니다.</p>
+
+<div class="toc"><b>차례</b>
+A. Claude Code 데스크톱 설치 (10분) → B. 에이전트 내려받기 (5분) → C. 폴더 열고 첫 질문 (1분) → D. 무료 데이터 키 등록 (5분) → 자주 묻는 걱정
+</div>
+
+<h2><span class="part">A.</span> Claude Code 데스크톱 설치</h2>
+<p>Claude Code는 Anthropic의 공식 도구입니다. 터미널(검은 창)로도, <b>데스크톱 앱(맥·윈도우)</b>으로도 쓸 수 있습니다. 처음이면 앱을 권합니다.</p>
+
+<div class="step"><div class="n">A1</div><div>
+<h3>공식 다운로드 페이지 접속</h3>
+<p><a href="https://claude.com/download" target="_blank">claude.com/download</a> 에서 내 운영체제(맥/윈도우)용 설치 파일을 받습니다.</p>
+<div class="shot"><img src="img/a1-download.png" alt="claude.com/download 실제 화면"><div class="cap">실제 다운로드 페이지 (2026-08 캡처) — 가운데 검은 버튼이 내 OS에 맞게 표시됩니다</div></div>
+</div></div>
+
+<div class="step"><div class="n">A2</div><div>
+<h3>설치 파일 실행</h3>
+<p>맥은 내려받은 파일을 열고 Claude 아이콘을 Applications 폴더로 끌어다 놓습니다. 윈도우는 설치 파일을 더블클릭하고 "다음"을 누르면 끝납니다.</p>
+</div></div>
+
+<div class="step"><div class="n">A3</div><div>
+<h3>로그인</h3>
+<p>앱을 열고 Claude 계정으로 로그인합니다. <b>유료 구독(Pro 이상)이 필요합니다</b> — 본 상품과 별도이며, Anthropic에 결제합니다. 계정이 없으면 <a href="https://claude.ai" target="_blank">claude.ai</a>에서 먼저 가입하세요.</p>
+<div class="shot"><img src="img/app-home.png" alt="Claude 데스크톱 앱 홈 화면"><div class="cap">로그인하면 나오는 실제 홈 화면 (2026-08 캡처) — 좌측 상단에 '홈 | Code' 탭이 보이면 성공입니다</div></div>
+</div></div>
+
+<div class="note">공식 안내가 필요하면 Anthropic 문서 <a href="https://code.claude.com/docs/en/desktop-quickstart" target="_blank">"Get started with the desktop app"</a>이 정본입니다.</div>
+
+<h2><span class="part">B.</span> 에이전트 내려받기 — git 몰라도 됩니다</h2>
+<p>결제가 확인되면, 구매 시 적어주신 GitHub 아이디로 <b>비공개 저장소 초대</b>가 갑니다. 여기서 파일을 내려받는 방법입니다.</p>
+
+<div class="step"><div class="n">B1</div><div>
+<h3>초대 수락</h3>
+<p>GitHub 가입 메일함에 "invited you to collaborate" 메일이 와 있습니다. 메일 속 <b>View invitation → Accept invitation</b>을 누릅니다. (메일이 없으면 github.com 로그인 후 알림 종 아이콘을 확인하세요.)</p>
+</div></div>
+
+<div class="step"><div class="n">B2</div><div>
+<h3>저장소 페이지에서 ZIP 내려받기</h3>
+<p>초대 수락 후 열리는 저장소 페이지에서 초록색 <b>&lt;&gt; Code</b> 버튼 → <b>Download ZIP</b>을 누릅니다. 이게 전부입니다 — git 명령어는 몰라도 됩니다.</p>
+<div class="shot"><img src="img/b2-downloadzip.png" alt="GitHub Code 버튼 메뉴 실제 화면"><div class="cap">실제 GitHub 화면 (2026-08 캡처) — 초록 Code 버튼을 누르면 이 메뉴가 열리고, 맨 아래가 Download ZIP입니다</div></div>
+</div></div>
+
+<div class="step"><div class="n">B3</div><div>
+<h3>압축 풀고, 기억하기 쉬운 곳에 두기</h3>
+<p>내려받은 ZIP을 더블클릭해 풀면 폴더 하나가 나옵니다. 바탕화면이나 문서 폴더처럼 기억하기 쉬운 위치로 옮겨두세요. 폴더 이름은 바꿔도 됩니다.</p>
+</div></div>
+
+<div class="note">나중에 git이 익숙해지면 <code>git clone</code>으로 받는 게 업데이트에 편하지만, 처음엔 ZIP이면 충분합니다. 방법은 가이드북 1챕터에도 있습니다.</div>
+
+<h2><span class="part">C.</span> 폴더 열고 첫 질문</h2>
+
+<div class="step"><div class="n">C1</div><div>
+<h3>Claude Code에서 폴더 열기</h3>
+<p>앱 좌측 상단의 <b>Code 탭</b>을 누르고 <b>새로 생성</b> → 방금 압축 푼 집사냥 폴더를 선택합니다. (앱은 채팅·Cowork·Code 3개 탭으로 되어 있고, 내 컴퓨터의 폴더를 직접 다루는 건 Code 탭입니다 — 공식 문서 기준.) 그 순간부터 에이전트는 폴더 안의 설정(분석 규칙·계산기·5인 검증 체계)을 읽고 부동산 전문 모드로 동작합니다.</p>
+</div></div>
+
+<div class="step"><div class="n">C2</div><div>
+<h3>한국어로 질문</h3>
+<p>입력창에 이렇게 치면 됩니다.</p>
+<div class="shot"><img src="img/c2-real.png" alt="실제 작업 화면 — 명령 입력"><div class="cap">판매자의 실제 작업 화면 — 한국어 한 줄이 입력의 전부입니다</div></div>
+</div></div>
+
+<div class="term">
+<span class="u">&gt;</span> 얼마까지 살 수 있어?<br><br>
+프로필 확인… 예산 계산기 실행 중<br><br>
+<span class="hl">시나리오별 최대 매수가</span><br>
+&nbsp;&nbsp;규제지역 3.33억 (제약: LTV 40%)<br>
+&nbsp;&nbsp;비규제(수도권) 6.67억 (제약: LTV 70%)
+</div>
+
+<p>명령어 암기, 코드 작성 — 전부 필요 없습니다. 질문하면 에이전트가 데이터를 수집하고 계산해서, 표와 리포트로 답합니다. 결과 보고서는 브라우저로 열리는 보기 좋은 페이지(HTML)로도 저장됩니다.</p>
+
+<h2><span class="part">D.</span> 무료 데이터 키 등록</h2>
+<p>실거래가 데이터는 정부 <b>공공데이터포털</b>(data.go.kr)에서 무료로 받습니다. 회원가입 → 활용신청 → 발급된 키를 파일에 붙여넣기까지, 화면 순서대로 찍은 안내가 <b>가이드북 1챕터</b>에 들어 있습니다. 처음 해도 5분쯤 걸립니다. 여기까지 하면 세팅 끝 — 이후로는 질문만 합니다.</p>
+
+<div class="note">막히면 온보딩 기간 중에는 제가 직접 봐드립니다. 1차 구매자 5명 한정으로 운영하는 이유가 이것입니다.</div>
+
+
+<h2><span class="part">E.</span> 세팅이 끝나면 이렇게 씁니다 — 실제 세션 기록</h2>
+<p>아래 두 사례는 이 페이지를 만들며 <b>실제로 세션을 돌려 받은 답변</b>입니다(2026-08-16 실행, 지면에 맞게 표만 재구성). 여러분이 받게 될 산출물의 실물이라고 보시면 됩니다.</p>
+
+<h3>사례 1 — "얼마까지 살 수 있어?"</h3>
+<p>가상 프로필(현금 2억·연소득 7,000만·무주택·만기 40년)을 주고 물었습니다.</p>
+<div class="term">
+<span class="u">&gt;</span> 현금 2억, 연소득 7천만, 무주택이야. 얼마까지 살 수 있어?<br><br>
+<span class="hl">① 매수력 계산 결과</span> (기준일 2026-08 규제)<br>
+&nbsp;&nbsp;규제지역&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.33억&nbsp;&nbsp;(제약: LTV 40%)<br>
+&nbsp;&nbsp;비규제 수도권&nbsp;&nbsp;5.55억&nbsp;&nbsp;(제약: DSR — 스트레스 가산 반영)<br>
+&nbsp;&nbsp;비규제 그 외&nbsp;&nbsp;&nbsp;6.67억&nbsp;&nbsp;(제약: LTV 70%)<br><br>
+정책대출(신생아·보금자리 등) 미적용 — 가구 속성 확인 시 상한 확대 가능
+</div>
+<p>눈여겨볼 것: 그냥 숫자만 주는 게 아니라 <b>어떤 규제에 걸렸는지</b>, 정책대출로 더 늘 수 있는지까지 스스로 밝힙니다.</p>
+
+<h3>사례 2 — "이 동네 요즘 어때?"</h3>
+<p>지역 하나를 지정해 12개월 진단을 시켰습니다. 에이전트가 국토부 실거래 API에서 매매 808건·전세 611건을 직접 수집해 계산했습니다.</p>
+<div class="term">
+<span class="u">&gt;</span> 군포 84 기준으로 최근 12개월 어땠어?<br><br>
+<span class="hl">군포시 84㎡ 12개월 진단</span> (표본: 매매 808건·전세 611건)<br>
+&nbsp;&nbsp;가격 추세&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;연 -1.67% — 완만한 조정<br>
+&nbsp;&nbsp;전고점 회복&nbsp;&nbsp;&nbsp;91.7%<br>
+&nbsp;&nbsp;거래량&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;최근 3개월이 이전 평균의 1.19배<br>
+&nbsp;&nbsp;전세가율 실측&nbsp;78.3% — 가정값 대신 실거래로 계산
+</div>
+<p>눈여겨볼 것: 전세가율을 "보통 60%"로 가정하지 않고 <b>실거래에서 실측</b>합니다. 이 차이 하나가 갭 예산 계산을 수억 원 바꿉니다.</p>
+
+<div class="note">이런 질문이 총 12종류쯤 됩니다 — 단지 진단, 옆 단지 비교, 세금 3안 비교, 계약서 점검, 청약 진단, 산 뒤의 기록·회고까지. 전부 판매 페이지의 카드에서 실물 형식을 볼 수 있습니다.</div>
+
+<h2>자주 묻는 걱정</h2>
+<dl class="faq">
+<dt>코딩을 진짜 하나도 몰라도 되나요?</dt>
+<dd>됩니다. 여러분이 입력하는 건 "이 동네 어때?" 같은 한국어 문장뿐입니다. 계산은 내장 스크립트가 하고, 그걸 실행하는 것도 에이전트입니다.</dd>
+<dt>터미널(검은 화면)을 꼭 써야 하나요?</dt>
+<dd>아니요. 데스크톱 앱으로 동일하게 동작합니다. 판매 페이지의 검은 화면은 같은 대화를 개발자용 화면에서 한 것뿐입니다.</dd>
+<dt>맥이어야 하나요?</dt>
+<dd>맥·윈도우 모두 됩니다. PC는 필요합니다 — 휴대폰 단독으로는 안 됩니다.</dd>
+<dt>비용은 뭐가 드나요?</dt>
+<dd>본 상품(1회) + Claude 구독(월, Anthropic 별도 결제). 데이터 API 키는 무료입니다.</dd>
+<dt>GitHub 계정이 없는데요?</dt>
+<dd>github.com에서 무료로 만들 수 있습니다(이메일만 있으면 2분). 다만 계정 생성·ZIP 다운로드 과정 자체가 부담스러우면 아래 항목을 읽어주세요.</dd>
+<dt>그래도 못 따라가면요?</dt>
+<dd>정직하게: 프로그램 설치와 폴더 다루기 자체가 처음이면 권하지 않습니다. 결제 전에 이 페이지의 A~D를 읽고 "할 수 있겠다" 싶은 분만 구매하시길 바랍니다. 발송 후에는 환불이 불가합니다.</dd>
+</dl>
+
+<div class="warn"><b>구매 전 확인</b> — 본 상품은 분석 도구·방법론이며 투자자문이 아닙니다. 수익을 보장하지 않고, 투자 판단과 책임은 본인에게 있습니다. 세무·법률 산출물은 전문가 확인을 권합니다.</div>
+
+<footer>3시간 만에 끝내는 집사냥 — 클로드코드 부동산 투자 · 문의는 판매 페이지를 통해<br>Claude Code는 Anthropic의 제품이며, 본 상품은 Anthropic과 무관한 독립 제작물입니다.</footer>
+</div>
+</body>
+</html>
