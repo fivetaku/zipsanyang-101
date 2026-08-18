@@ -57,6 +57,45 @@
   .toc { background:#fff; border:1px solid var(--line); border-radius:10px; padding:16px 20px; margin:20px 0; font-size:15px; }
   .toc b { display:block; margin-bottom:6px; }
 </style>
+<!-- GA4: 행동 계측 (스크롤·섹션 도달·CTA 클릭) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2PCDVB75YF"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-2PCDVB75YF');
+
+document.addEventListener('DOMContentLoaded', function(){
+  // 스크롤 깊이 25/50/75/100
+  var marks = [25,50,75,100], fired = {};
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement;
+    var pct = Math.round((h.scrollTop + window.innerHeight) / h.scrollHeight * 100);
+    marks.forEach(function(m){
+      if(pct >= m && !fired[m]){ fired[m] = true; gtag('event', 'scroll_depth', {depth: m}); }
+    });
+  }, {passive:true});
+
+  // 섹션 도달 (h2 기준 — 어디까지 읽고 이탈하는지)
+  if('IntersectionObserver' in window){
+    var seen = {};
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){
+          var name = e.target.textContent.trim().slice(0,30);
+          if(!seen[name]){ seen[name] = true; gtag('event', 'section_view', {section: name}); }
+        }
+      });
+    }, {threshold: 0.5});
+    document.querySelectorAll('h2').forEach(function(el){ io.observe(el); });
+  }
+
+  // 래피드 구매 링크 클릭
+  document.querySelectorAll('a[href*="latpeed.com"]').forEach(function(a){
+    a.addEventListener('click', function(){ gtag('event', 'cta_click', {target: 'latpeed'}); });
+  });
+});
+</script>
 </head>
 <body>
 <div class="wrap">
